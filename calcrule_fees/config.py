@@ -6,7 +6,7 @@ CLASS_RULE_PARAM_VALIDATION = [
                 "type": "number",
                 "name": "fee_rate",
                 "label": {
-                    "en": "fee rate(%)",
+                    "en": "Fee rate(%)",
                     "fr": "Taux de frais(%)"
                 },
                 "rights": {
@@ -16,14 +16,14 @@ CLASS_RULE_PARAM_VALIDATION = [
                     "replace": "157206"
                 },
                 "relevance": "True",
-                "condition": ".$_<100",
-                "default": "1.5"
+                "condition": "INPUT<100",
+                "default": "2"
             },
             {
                 "type": "string",
-                "name": "paymentOrigin",
+                "name": "payment_origin",
                 "label": {
-                    "en": "Payement origin",
+                    "en": "Payment origin",
                     "fr": "Origine de paiement"
                 },
                 "rights": {
@@ -33,11 +33,15 @@ CLASS_RULE_PARAM_VALIDATION = [
                     "replace": "157206"
                 },
                 "relevance": "True",
-                "condition": "True",
-                "default": ""
+                "default": "value"
             },
         ]
     },
+    {
+        "class": "Product",
+        "parameters": [
+            ]
+    }
 ]
 
 FROM_TO = [
