@@ -11,7 +11,7 @@ class BatchRunToBillConverter(object):
         bill = {}
         cls.build_subject(batch_run, bill)
         cls.build_thirdparty(bill)
-        cls.build_code(payment_plan, batch_run, bill)
+        cls.build_code(payment_plan, payment, batch_run, bill)
         cls.build_date_dates(batch_run, bill)
         #cls.build_tax_analysis(bill)
         cls.build_currency(bill)
@@ -31,10 +31,11 @@ class BatchRunToBillConverter(object):
         bill['thirdparty_type'] = ContentType.objects.get_for_model(Payer)
 
     @classmethod
-    def build_code(cls, payment_plan, batch_run, bill):
+    def build_code(cls, payment_plan, payment, batch_run, bill):
         # take default payer id = 1
         bill["code"] = f"" \
             f"{payment_plan.code}" \
+            f"-{payment.code_tp}" \
             f"-1" \
             f"-{batch_run.run_year}" \
             f"-{batch_run.run_month}"
