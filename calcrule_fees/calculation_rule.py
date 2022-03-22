@@ -3,7 +3,6 @@ from calcrule_fees.config import CLASS_RULE_PARAM_VALIDATION, \
     DESCRIPTION_CONTRIBUTION_VALUATION, FROM_TO
 from calcrule_fees.converters import \
     BatchRunToBillConverter, InvoicePaymentToBillItemConverter
-#from calcrule_fees.utils import get_batch_run_products
 from django.core.exceptions import ValidationError
 from gettext import gettext as _
 from invoice.models import InvoicePayment
@@ -137,7 +136,6 @@ class FeesCalculationRule(AbsCalculationRule):
 
     @classmethod
     def _get_batch_run_parameters(cls, **kwargs):
-        # TODO: test Batch run ID, update end_date, startdate
         audit_user_id = kwargs.get('audit_user_id', None)
         product_id = kwargs.get('product_id', None)
         start_date = kwargs.get('start_date', None)
