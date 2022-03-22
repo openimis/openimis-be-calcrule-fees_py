@@ -31,7 +31,7 @@ class BatchRunToBillConverter(object):
         bill['thirdparty_type'] = ContentType.objects.get_for_model(Payer)
 
     @classmethod
-    def build_code(cls, payment, batch_run, bill):
+    def build_code(cls, payment_plan, batch_run, bill):
         # take default payer id = 1
         bill["code"] = f"" \
             f"{payment_plan.code}" \
