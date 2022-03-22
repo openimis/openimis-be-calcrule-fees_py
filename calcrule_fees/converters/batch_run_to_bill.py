@@ -34,7 +34,7 @@ class BatchRunToBillConverter(object):
     def build_code(cls, payment, batch_run, bill):
         # take default payer id = 1
         bill["code"] = f"" \
-            f"CP-{payment.code_tp}" \
+            f"{payment.code_tp}" \
             f"-1" \
             f"-{batch_run.run_year}" \
             f"-{batch_run.run_month}"
