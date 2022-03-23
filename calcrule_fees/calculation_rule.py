@@ -1,3 +1,5 @@
+import json
+
 from calcrule_fees.apps import AbsCalculationRule
 from calcrule_fees.config import CLASS_RULE_PARAM_VALIDATION, \
     DESCRIPTION_CONTRIBUTION_VALUATION, FROM_TO
