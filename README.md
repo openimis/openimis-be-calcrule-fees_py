@@ -1,9 +1,8 @@
-# openimis-be-calcrule-fees_py
-This repository holds the files of the openIMIS backend calculation rule fees reference module.
-It is dedicated to be deployed as a module of [openimis-be_py](https://github.com/openimis/openimis-be_py). It is an 
-extended part of calculation module [openimis-be-calculation_py](https://github.com/openimis/openimis-be-calculation_py) 
-and therefore that module is dependent on this core calculation module. This module contains additional calculation rules. 
+# Calcrule to calculate Paymen fees for payment source
 
-## Models
-  - None (using no database approach for CalculationRule) - Calculation Rule is saved by defining class 
-    extending the ABSCalculationClass from core module.
+
+ This calculation will, for the selected level and product, calculate how much the insurance need to pay the payment platform for the fee for payment service
+ 
+ it create bill for the payment platform based on the contribution made through that platform attached to invoice item
+ 
+ https://openimis.atlassian.net/wiki/spaces/OP/pages/3045818376/Payment+plan+calculation+rule+fees
