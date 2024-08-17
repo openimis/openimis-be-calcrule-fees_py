@@ -1,6 +1,6 @@
 import json
 
-from calcrule_fees.apps import AbsCalculationRule
+from calcrule_fees.apps import AbsStrategy
 from calcrule_fees.config import CLASS_RULE_PARAM_VALIDATION, \
     DESCRIPTION_CONTRIBUTION_VALUATION, FROM_TO
 from calcrule_fees.converters import \
@@ -19,7 +19,7 @@ from claim_batch.models import BatchRun
 from core.models import User
 
 
-class FeesCalculationRule(AbsCalculationRule):
+class FeesCalculationRule(AbsStrategy):
     version = 1
     uuid = "1a69f129-afa3-4919-a53d-e111f5fb2b2b"
     calculation_rule_name = "payment: fees"
@@ -32,27 +32,6 @@ class FeesCalculationRule(AbsCalculationRule):
     type = "account_payable"
     sub_type = "fees"
 
-    signal_get_rule_name = Signal([])
-    signal_get_rule_details = Signal([])
-    signal_get_param = Signal([])
-    signal_get_linked_class = Signal([])
-    signal_calculate_event = Signal([])
-    signal_convert_from_to = Signal([])
-
-    @classmethod
-    def ready(cls):
-        now = datetime.datetime.now()
-        condition_is_valid = (now >= cls.date_valid_from and now <= cls.date_valid_to) \
-            if cls.date_valid_to else (now >= cls.date_valid_from and cls.date_valid_to is None)
-        if condition_is_valid:
-            if cls.status == "active":
-                # register signals getParameter to getParameter signal and getLinkedClass ot getLinkedClass signal
-                cls.signal_get_rule_name.connect(cls.get_rule_name, dispatch_uid="on_get_rule_name_signal")
-                cls.signal_get_rule_details.connect(cls.get_rule_details, dispatch_uid="on_get_rule_details_signal")
-                cls.signal_get_param.connect(cls.get_parameters, dispatch_uid="on_get_param_signal")
-                cls.signal_get_linked_class.connect(cls.get_linked_class, dispatch_uid="on_get_linked_class_signal")
-                cls.signal_calculate_event.connect(cls.run_calculation_rules, dispatch_uid="on_calculate_event_signal")
-                cls.signal_convert_from_to.connect(cls.run_convert, dispatch_uid="on_convert_from_to")
 
     @classmethod
     def active_for_object(cls, instance, context, type="account_payable", sub_type="fees"):
