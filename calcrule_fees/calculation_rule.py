@@ -1,6 +1,6 @@
 import json
 
-from calcrule_fees.apps import AbsStrategy
+from core.abs_calculation_rule import AbsStrategy
 from calcrule_fees.config import CLASS_RULE_PARAM_VALIDATION, \
     DESCRIPTION_CONTRIBUTION_VALUATION, FROM_TO
 from calcrule_fees.converters import \
@@ -17,6 +17,7 @@ from contribution_plan.models import PaymentPlan
 from product.models import Product
 from claim_batch.models import BatchRun
 from core.models import User
+from uuid import UUID
 
 
 class FeesCalculationRule(AbsStrategy):
@@ -44,9 +45,9 @@ class FeesCalculationRule(AbsStrategy):
         class_name = instance.__class__.__name__
         match = False
         if class_name == "ABCMeta":
-            match = str(cls.uuid) == str(instance.uuid)
-        elif class_name == "PaymentPlan":
-            match = cls.uuid == str(instance.calculation)
+            match = UUID(cls.uuid) == UUID(instance.uuid)
+        if class_name == "PaymentPlan":
+            match = UUID(cls.uuid) == UUID(instance.calculation)
         elif class_name == "BatchRun":
             # BatchRun → Product or Location if no prodcut
             match = cls.check_calculation(instance.location)
